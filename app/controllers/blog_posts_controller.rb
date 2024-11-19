@@ -3,6 +3,7 @@ class BlogPostsController < ApplicationController
   before_action :set_blog_post, except: [:index, :new, :create] #only: [:edit, :update, :show, :destory]
   def index
     @blog_posts = user_signed_in? ? BlogPost.sorted : BlogPost.published.sorted
+    @pagy, @blog_posts = pagy(@blog_posts)
   end
   def show
   rescue ActiveRecord::RecordNotFound
